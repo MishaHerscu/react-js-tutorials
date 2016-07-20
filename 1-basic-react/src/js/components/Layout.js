@@ -19,18 +19,19 @@ export default class Layout extends React.Component {
     this.setState({title});
   }
 
-  updateBoard() {
-    this.state.boardVals.forEach((val, index) => {
-      let cell = document.getElementById('cell-' + index);
-      cell.innerHTML = val;
-    });
-  }
+  // updateBoard() {
+  //   this.state.boardVals.forEach((val, index) => {
+  //     let cell = document.getElementById('cell-' + index);
+  //     cell.innerHTML = val;
+  //   });
+  // }
 
-  clearBoard() {
+  newGame() {
     let emptyBoard = [,,,,,,,,];
     this.setState({boardVals: emptyBoard});
+    this.setState({turn: "X"});
 
-    this.updateBoard();
+    // this.updateBoard();
   }
 
   updateBoardVal(event) {
@@ -46,7 +47,7 @@ export default class Layout extends React.Component {
       this.setState({turn:"X"});
     }
 
-    this.updateBoard();
+    // this.updateBoard();
   }
 
   // the .bind(this) is critical because we are passing a method as a prop
@@ -59,7 +60,7 @@ export default class Layout extends React.Component {
         <br />
         <br />
         <br />
-        <Gameboard clearBoard={this.clearBoard.bind(this)} updateBoardVal={this.updateBoardVal.bind(this)} boardVals={this.state.boardVals} turn={this.state.turn}/>
+        <Gameboard newGame={this.newGame.bind(this)} updateBoardVal={this.updateBoardVal.bind(this)} boardVals={this.state.boardVals} turn={this.state.turn}/>
         <br />
         <br />
         <br />
