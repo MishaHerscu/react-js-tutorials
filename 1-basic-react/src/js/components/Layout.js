@@ -12,7 +12,7 @@ export default class Layout extends React.Component {
   }
 
   changeTitle(title) {
-    this.setState({title});
+    this.setState({title}); // this is title: title with ES6
   }
 
   render() {
