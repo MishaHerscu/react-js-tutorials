@@ -1,6 +1,7 @@
 import React from "react";
 
 import Footer from "./Footer";
+import Gameboard from "./Gameboard";
 import Header from "./Header";
 
 export default class Layout extends React.Component {
@@ -8,6 +9,8 @@ export default class Layout extends React.Component {
     super();
     this.state = {
       title: "It's Working! It's Working!",
+      boardVals: [,,,,,,,,],
+      turn: "X"
     };
   }
 
@@ -22,6 +25,13 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
+        <br />
+        <br />
+        <br />
+        <Gameboard />
+        <br />
+        <br />
+        <br />
         <Footer />
       </div>
     );
