@@ -4,7 +4,9 @@ import React from "react";
 export default class Gameboard extends React.Component {
 
   handleCellClick(event) {
-    this.props.updateBoardVal(event);
+    if(!this.props.gameOver){
+      this.props.updateBoardVal(event);
+    }
   }
 
   handleNewGame() {

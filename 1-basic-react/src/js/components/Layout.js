@@ -3,14 +3,18 @@ import React from "react";
 import Footer from "./Footer";
 import Gameboard from "./Gameboard";
 import Header from "./Header";
+import Message from "./Message";
+
 
 export default class Layout extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: "It's Working! It's Working!",
+      title: "Tic Tac React",
       boardVals: [,,,,,,,,],
-      turn: "X"
+      turn: "X",
+      winner: null,
+      gameOver: false
     };
   }
 
@@ -30,8 +34,51 @@ export default class Layout extends React.Component {
     let emptyBoard = [,,,,,,,,];
     this.setState({boardVals: emptyBoard});
     this.setState({turn: "X"});
-
+    this.setState({gameOver: false});
+    this.setState({winner: null});
     // this.updateBoard();
+  }
+
+  checkGame(){
+
+    // check for winner
+    const winningArrays = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6],
+    ];
+
+    for( let i = 0, max = winningArrays.length; i < max; i++ ){
+      let winningArray = winningArrays[i];
+      let a = winningArray[0];
+      let b = winningArray[1];
+      let c = winningArray[2];
+      let values = this.state.boardVals;
+
+      if(values[a] && values[a] === values[b] && values[b] === values[c]){
+        this.setState({gameOver: true});
+        this.setState({winner: values[a]});
+        return true;
+      }
+    }
+
+    // check for ties
+    let moveCount = this.state.boardVals.filter(String).length;
+    if(moveCount > 8) {
+      this.setState({gameOver: true});
+      this.setState({winner: null});
+      return true;
+    }
+
+    // game continues
+    this.setState({gameOver: false});
+    this.setState({winner: null});
+    return false;
   }
 
   updateBoardVal(event) {
@@ -47,6 +94,8 @@ export default class Layout extends React.Component {
       this.setState({turn:"X"});
     }
 
+    this.checkGame()
+
     // this.updateBoard();
   }
 
@@ -57,10 +106,9 @@ export default class Layout extends React.Component {
       <div>
         <br />
         <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
+        <Message winner={this.state.winner} gameOver={this.state.gameOver}/>
         <br />
-        <br />
-        <br />
-        <Gameboard newGame={this.newGame.bind(this)} updateBoardVal={this.updateBoardVal.bind(this)} boardVals={this.state.boardVals} turn={this.state.turn}/>
+        <Gameboard newGame={this.newGame.bind(this)} updateBoardVal={this.updateBoardVal.bind(this)} boardVals={this.state.boardVals} turn={this.state.turn} winner={this.state.winner} gameOver={this.state.gameOver}/>
         <br />
         <br />
         <br />

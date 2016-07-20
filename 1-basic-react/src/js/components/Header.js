@@ -13,7 +13,6 @@ export default class Header extends React.Component {
     return (
       <div>
         <Title title={this.props.title} />
-        <h3>TIC TAC REACT</h3>
       </div>
     );
   }
