@@ -3,8 +3,8 @@ import React from "react";
 import Title from "./Header/Title";
 
 export default class Header extends React.Component {
-  handleChange(e) {
-    const title = e.target.value;
+  handleChange(event) {
+    const title = event.target.value;
     this.props.changeTitle(title);
   }
 
