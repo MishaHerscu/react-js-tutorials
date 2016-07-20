@@ -3,14 +3,18 @@ import React from "react";
 
 export default class Gameboard extends React.Component {
 
-  clearBoard() {
-    console.log('clearing');
-    console.log(this.state.boardVals);
+  updateBoard() {
+    this.state.boardVals.forEach((val, index) => {
+      let cell = document.getElementById('cell-' + index);
+      cell.innerHTML = val;
+    });
+  }
 
+  clearBoard() {
     let emptyBoard = [,,,,,,,,];
     this.setState({boardVals: emptyBoard});
-    console.log(this.state.boardVals);
 
+    this.updateBoard();
   }
 
   updateBoardVal(event) {
@@ -26,14 +30,7 @@ export default class Gameboard extends React.Component {
       this.setState({turn:"X"});
     }
 
-    updateBoard();
-  }
-
-  updateBoard() {
-    this.state.boardVals.forEach((val, index) => {
-      let cell = document.getElementById('cell-' + index);
-      cell.innerHTML = val;
-    });
+    this.updateBoard();
   }
 
   render() {

@@ -24,6 +24,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
+        <br />
         <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
         <br />
         <br />
@@ -33,6 +34,8 @@ export default class Layout extends React.Component {
         <br />
         <br />
         <Footer />
+        <br />
+        <br />
       </div>
     );
   }
